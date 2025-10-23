@@ -1,0 +1,35 @@
+<div class="chat-container">
+  <h1 class="title">AI Interviews</h1>
+
+  <div class="chat-window">
+    <div class="message" *ngFor="let m of messages" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'">
+      <div class="bubble">{{ m.content }}</div>
+    </div>
+  </div>
+
+  <div class="input-row">
+    <label>Topics:&nbsp;</label>
+    <label><input type="checkbox" [(ngModel)]="selectedTopics.java" name="t_java"> Java</label>
+    <label><input type="checkbox" [(ngModel)]="selectedTopics.python" name="t_python"> Python</label>
+    <label><input type="checkbox" [(ngModel)]="selectedTopics.csharp" name="t_csharp"> C#</label>
+    <label><input type="checkbox" [(ngModel)]="selectedTopics.angular" name="t_angular"> Angular</label>
+    <label><input type="checkbox" [(ngModel)]="selectedTopics.spring" name="t_spring"> Spring</label>
+    <label><input type="checkbox" [(ngModel)]="selectedTopics.springboot" name="t_springboot"> Spring Boot</label>
+    <label style="margin-left:12px;"><input type="checkbox" [(ngModel)]="shuffleQuestions" name="shuffle"> Shuffle</label>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="input-row">
+    <input [(ngModel)]="userInput" name="message" placeholder="Type your question or answer..." [disabled]="isLoading" />
+    <button type="submit" [disabled]="isLoading || !userInput.trim()">Send</button>
+    <button type="button" (click)="askMeAQuestion()" [disabled]="isLoading">Ask me a question</button>
+    <button type="button" (click)="startInterview()" [disabled]="isLoading || isInterview">Start Interview</button>
+    <button type="button" (click)="toggleListening()" [disabled]="isLoading">{{ isListening ? 'Stop Mic' : 'Start Mic' }}</button>
+    <button type="button" (click)="toggleTTS()">{{ ttsEnabled ? 'Mute' : 'Unmute' }}</button>
+  </form>
+
+  <div class="hint">
+    Tip: To enable live AI, save your OpenAI API key via the browser console: localStorage.setItem('openai_api_key','YOUR_KEY')
+  </div>
+</div>
+
+

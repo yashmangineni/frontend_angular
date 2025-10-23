@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Test User",
+    "email": "test@example.com",
+    "password": "password123"
+  },
+  {
+    "id": 2,
+    "name": "Second Test User",
+    "email": "test2@example.com",
+    "password": "password123"
+  },
+  {
+    "id": 3,
+    "name": "mani",
+    "email": "mani@gmail.com",
+    "password": "Mani@1234"
+  },
+  {
+    "id": 4,
+    "name": "yaswanth",
+    "email": "sai1@gmail.com",
+    "password": "Sai@1234"
+  },
+  {
+    "id": 5,
+    "name": "mmm",
+    "email": "mmm@gmail.com",
+    "password": "Mani@1234"
+  },
+  {
+    "id": 6,
+    "name": "La",
+    "email": "Lali@gmail.com",
+    "password": "Lali@1234"
+  }
+]

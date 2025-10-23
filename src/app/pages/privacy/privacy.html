@@ -1,0 +1,93 @@
+<div class="policy-container">
+    <header class="policy-header">
+      <h1>{{ appName }} — Privacy Policy</h1>
+      <p class="effective">Effective Date: {{ effectiveDate }}</p>
+    </header>
+  
+    <main class="policy-body">
+      <section class="intro">
+        <p>
+          Welcome to <strong>{{ appName }}</strong>. We are committed to protecting your privacy while
+          providing an easy, AI-driven interview preparation experience — especially useful for last-minute
+          (one day) preparation, HR question practice, and AI interview performance testing.
+        </p>
+      </section>
+  
+      <section>
+        <h2>Vision</h2>
+        <p>To empower every job seeker to <strong>crack interviews with confidence</strong> by providing AI-driven, last-minute preparation tools, HR questions, and performance evaluation features.</p>
+      </section>
+  
+      <section>
+        <h2>Mission</h2>
+        <ul>
+          <li>Make interview preparation simple, effective, and accessible.</li>
+          <li>Provide easy-to-practice HR and technical questions.</li>
+          <li>Deliver AI-powered interview simulations and personalized feedback.</li>
+        </ul>
+      </section>
+  
+      <section>
+        <h2>Problem Statement</h2>
+        <p>Many candidates face:</p>
+        <ul>
+          <li>Lack of time to prepare before interviews.</li>
+          <li>Nervousness about HR and technical questions.</li>
+          <li>No real-time feedback to measure readiness.</li>
+        </ul>
+        <p><strong>{{ appName }}</strong> addresses these problems with quick, AI-powered one-day preparation tools and testing features to assess readiness.</p>
+      </section>
+  
+      <section>
+        <h2>Information We Collect</h2>
+        <ol>
+          <li><strong>Personal Information:</strong> name, email, and account details for login and profile.</li>
+          <li><strong>Usage Data:</strong> interactions with questions, tests, and simulations.</li>
+          <li><strong>Performance Data:</strong> test results, scores, and AI feedback.</li>
+        </ol>
+      </section>
+  
+      <section>
+        <h2>How We Use Your Information</h2>
+        <p>We use collected data to provide and improve features, personalize recommendations, track progress, run AI simulations, and send important updates or support messages.</p>
+      </section>
+  
+      <section>
+        <h2>Data Security</h2>
+        <p>We implement reasonable technical and organizational measures (e.g., encryption in transit and at rest, secure servers) to protect your data. No method of internet transmission is 100% secure, so absolute guarantees are not possible.</p>
+      </section>
+  
+      <section>
+        <h2>Third-Party Services</h2>
+        <p>We may use third-party services (analytics, cloud storage, AI services). These providers have their own privacy policies and we recommend reviewing them. When we share data with vendors, we limit sharing to what is necessary to provide the service.</p>
+      </section>
+  
+      <section>
+        <h2>Your Rights</h2>
+        <ul>
+          <li>Request access to the personal data we hold about you.</li>
+          <li>Request correction of inaccurate personal data.</li>
+          <li>Request deletion of your account and personal data.</li>
+          <li>Opt-out of marketing communications.</li>
+        </ul>
+        <p>To exercise these rights, contact us at <a [href]="'mailto:' + contactEmail">{{ contactEmail }}</a>.</p>
+      </section>
+  
+      <section>
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy occasionally. We will update the "Effective Date" at the top and notify users where appropriate.</p>
+      </section>
+  
+      <section class="contact">
+        <h2>Contact Us</h2>
+        <p>If you have questions about this policy, contact us at:</p>
+        <p><strong>Email:</strong> <a [href]="'mailto:' + contactEmail">{{ contactEmail }}</a></p>
+        <!-- <p><strong>Website:</strong> <a [href]="websiteUrl" target="_blank" rel="noopener">{{ websiteUrl }}</a></p> -->
+      </section>
+    </main>
+  
+    <footer class="policy-footer">
+      <small>© {{ appName }}. All rights reserved.</small>
+    </footer>
+  </div>
+  

@@ -1,0 +1,36 @@
+<!-- Background animation elements -->
+<div class="background-animation">
+  <div class="bg-bubble"></div>
+  <div class="bg-bubble"></div>
+  <div class="bg-bubble"></div>
+  <div class="bg-bubble"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+
+<div class="container">
+  <h1>Signup Account</h1>
+  <form (ngSubmit)="submit()">
+    <label>Name</label>
+    <input [(ngModel)]="name" name="name" required [disabled]="loading" />
+    
+    <label>Email</label>
+    <input [(ngModel)]="email" name="email" type="email" required [disabled]="loading" />
+    
+    <label>Password</label>
+    <input [(ngModel)]="password" name="password" type="password" required [disabled]="loading" />
+    
+    <button type="submit" [disabled]="loading">
+      <span *ngIf="!loading">Create Account</span>
+      <span *ngIf="loading">Creating Account...</span>
+    </button>
+    
+    <div class="error" *ngIf="error">{{ error }}</div>
+    <div class="success" *ngIf="success">{{ success }}</div>
+
+    <div class="signup-link text-center mt-3">
+      <p>Already have an account? <a routerLink="/login">Login</a></p>
+    </div>
+  </form>
+</div>

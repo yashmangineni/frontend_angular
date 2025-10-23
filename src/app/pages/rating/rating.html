@@ -1,0 +1,103 @@
+<div class="rating-container">
+  <h1 class="title">⭐ Rate Our App</h1>
+  
+  <!-- Loading indicator -->
+  <div class="loading" *ngIf="loading">
+    <p>Loading ratings...</p>
+  </div>
+  
+  <div class="rating-overview" *ngIf="!loading && ratings.length > 0">
+    <div class="overall-rating">
+      <div class="rating-value">{{ averageRating }}</div>
+      <div class="rating-stars">
+        <span *ngFor="let star of getArray(5); let i = index" 
+              class="star" 
+              [class.filled]="i < Math.floor(averageRating)"
+              [class.half-filled]="i === Math.floor(averageRating) && averageRating % 1 !== 0">
+          ★
+        </span>
+      </div>
+      <div class="rating-count">Based on {{ totalRatings }} ratings</div>
+    </div>
+    
+    <!-- Rating distribution -->
+    <div class="rating-distribution" *ngIf="ratings.length > 0">
+      <h3>Rating Distribution</h3>
+      <div class="distribution-bar" *ngFor="let i of [5,4,3,2,1]">
+        <span class="rating-number">{{ i }} ★</span>
+        <div class="bar-container">
+          <div class="bar" [style.width.%]="getRatingPercentage(i)"></div>
+        </div>
+        <span class="rating-count">{{ getRatingCount(i) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rating-form" *ngIf="!loading && !hasRated">
+    <h2>How would you rate our app?</h2>
+    
+    <div class="stars-rating">
+      <span *ngFor="let star of getArray(5); let i = index" 
+            class="star selectable" 
+            [class.selected]="i < rating"
+            (click)="setRating(i + 1)">
+        ★
+      </span>
+    </div>
+    
+    <div class="rating-labels">
+      <span>1 - Poor</span>
+      <span>2 - Fair</span>
+      <span>3 - Good</span>
+      <span>4 - Very Good</span>
+      <span>5 - Excellent</span>
+    </div>
+    
+    <div class="comment-section">
+      <label for="comment">Leave a comment (optional):</label>
+      <textarea 
+        id="comment" 
+        [(ngModel)]="comment" 
+        placeholder="Tell us what you think..."
+        rows="4">
+      </textarea>
+    </div>
+    
+    <button class="submit-btn" (click)="submitRating()" [disabled]="rating === 0 || loading">
+      {{ loading ? 'Submitting...' : 'Submit Rating' }}
+    </button>
+  </div>
+  
+  <div class="thank-you" *ngIf="!loading && hasRated">
+    <h2>Thank You for Your Rating!</h2>
+    <p>Your feedback helps us improve our app.</p>
+    <button class="rate-again-btn" (click)="resetRating()">
+      Rate Again
+    </button>
+  </div>
+  
+  <div class="all-ratings" *ngIf="!loading && ratings.length > 0">
+    <h3>All User Ratings ({{ totalRatings }} total)</h3>
+    <div class="ratings-list">
+      <div class="rating-item" *ngFor="let rating of ratings">
+        <div class="rating-header">
+          <div class="user-rating">
+            <span *ngFor="let star of getArray(5); let i = index" 
+                  class="star small" 
+                  [class.filled]="i < rating.score">
+              ★
+            </span>
+          </div>
+          <div class="rating-date">{{ rating.date | date:'short' }}</div>
+        </div>
+        <div class="rating-comment" *ngIf="rating.comment">
+          {{ rating.comment }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="no-ratings" *ngIf="!loading && ratings.length === 0">
+    <p>No ratings yet. Be the first to rate our app!</p>
+  </div>
+</div>

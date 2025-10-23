@@ -1,0 +1,74 @@
+/* layout */
+.policy-container {
+    max-width: 980px;
+    margin: 24px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    color: #111827;
+    font-family: Inter, Roboto, "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* header */
+  .policy-header {
+    border-bottom: 1px solid rgba(17,24,39,0.06);
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+  }
+  
+  .policy-header h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: -0.2px;
+  }
+  
+  .policy-header .effective {
+    margin: 6px 0 0 0;
+    color: #6b7280;
+    font-size: 13px;
+  }
+  
+  /* body */
+  .policy-body h2 {
+    font-size: 16px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #0f172a;
+  }
+  
+  .policy-body p, .policy-body ul, .policy-body ol {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+  }
+  
+  /* lists spacing */
+  .policy-body ul, .policy-body ol {
+    padding-left: 18px;
+  }
+  
+  /* contact & footer */
+  .contact a {
+    color: #0b5cff;
+    text-decoration: none;
+  }
+  
+  .policy-footer {
+    margin-top: 22px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(17,24,39,0.04);
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+  }
+  
+  /* responsive */
+  @media (max-width: 600px) {
+    .policy-container {
+      padding: 16px;
+      margin: 12px;
+    }
+    .policy-header h1 { font-size: 18px; }
+  }
+  

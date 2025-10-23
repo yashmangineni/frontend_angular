@@ -1,0 +1,271 @@
+<div class="coding-test-container">
+  <h1 class="title">🚀 Ultimate Coding Skills Test</h1>
+
+  <!-- Language Selection & Test Setup -->
+  <div class="setup-section" *ngIf="!isTestActive">
+    <div class="language-selection">
+      <h3>📋 Select Programming Language</h3>
+      <div class="language-options">
+        <label class="language-option" [class.selected]="selectedLanguage === 'java'">
+          <input type="radio" name="language" value="java" [(ngModel)]="selectedLanguage">
+         
+          <span class="language-name">Java</span>
+        </label>
+        <label class="language-option" [class.selected]="selectedLanguage === 'python'">
+          <input type="radio" name="language" value="python" [(ngModel)]="selectedLanguage">
+          
+          <span class="language-name">Python</span>
+        </label>
+        <label class="language-option" [class.selected]="selectedLanguage === 'csharp'">
+          <input type="radio" name="language" value="csharp" [(ngModel)]="selectedLanguage">
+         
+          <span class="language-name">C#</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="test-info">
+      <h3>📊 Advanced Test Information</h3>
+      <div class="info-grid">
+        <!-- <div class="info-item">
+          <span class="info-label">Total Problems Available:</span>
+          <span class="info-value">{{ totalAvailableProblems }}+</span>
+        </div> -->
+        <div class="info-item">
+          <span class="info-label">Problems per Test:</span>
+          <span class="info-value">{{ totalProblems }} </span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Duration:</span>
+          <span class="info-value">{{ testDurationMinutes }} minutes</span>
+        </div>
+        <!-- <div class="info-item">
+          <span class="info-label">Features:</span>
+          <span class="info-value">✨ answers, ⏭️ Skip, ⏰ Timer</span>
+        </div> -->
+      </div>
+      
+      <!-- Difficulty Filter -->
+      <div class="difficulty-filter">
+        <h4>🎯 Select Difficulty Level:</h4>
+        <div class="difficulty-options">
+          <label class="difficulty-option" [class.selected]="selectedDifficulty === 'all'">
+            <input type="radio" name="difficulty" value="all" [(ngModel)]="selectedDifficulty">
+            <span class="difficulty-name">All Levels</span>
+          </label>
+          <label class="difficulty-option" [class.selected]="selectedDifficulty === 'Basic'">
+            <input type="radio" name="difficulty" value="Basic" [(ngModel)]="selectedDifficulty">
+            <span class="difficulty-name">Basic</span>
+          </label>
+          <label class="difficulty-option" [class.selected]="selectedDifficulty === 'Intermediate'">
+            <input type="radio" name="difficulty" value="Intermediate" [(ngModel)]="selectedDifficulty">
+            <span class="difficulty-name">Intermediate</span>
+          </label>
+          <label class="difficulty-option" [class.selected]="selectedDifficulty === 'Advanced'">
+            <input type="radio" name="difficulty" value="Advanced" [(ngModel)]="selectedDifficulty">
+            <span class="difficulty-name">Advanced</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- <div class="problem-types">
+        <h4>🎯 Problem Categories:</h4>
+        <div class="category-tags">
+          <span class="category-tag">🔄 Palindromes</span>
+          <span class="category-tag">🔀 Anagrams</span>
+          <span class="category-tag">🔢 Prime Numbers</span>
+          <span class="category-tag">📈 HCF/LCM</span>
+          <span class="category-tag">💪 Strong Numbers</span>
+          <span class="category-tag">⭐ Perfect Numbers</span>
+          <span class="category-tag">🎨 Patterns</span>
+          <span class="category-tag">📊 Arrays</span>
+          <span class="category-tag">🔤 Strings</span>
+          <span class="category-tag">🤖 Algorithms</span>
+        </div>
+      </div> -->
+    </div>
+
+    <button class="start-btn" (click)="startCodingTest()">
+      🚀 Start Test
+    </button>
+  </div>
+
+  <!-- Active Test Interface -->
+  <div class="test-interface" *ngIf="isTestActive && currentProblem">
+    <!-- Progress Header -->
+    <div class="progress-header">
+      <div class="progress-info">
+        <span class="problem-counter">Problem {{ currentProblemIndex + 1 }} of {{ currentProblems.length }}</span>
+        <span class="language-badge">{{ selectedLanguage.toUpperCase() }}</span>
+        <span class="timer" [class.warning]="timeRemainingSeconds < 300" [class.danger]="timeRemainingSeconds < 60">
+          ⏰ {{ getFormattedTime() }}
+        </span>
+        <!-- Back to Language Selection Button -->
+        <button class="back-btn" (click)="goBackToLanguageSelection()" title="Return to Language Selection">
+          ⬅️ Back to Start
+        </button>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="((currentProblemIndex) / currentProblems.length) * 100"></div>
+      </div>
+    </div>
+
+    <!-- Problem Statement -->
+    <div class="problem-section">
+      <div class="problem-header">
+        <h2 class="problem-title">{{ currentProblem.title }}</h2>
+        <div class="problem-meta">
+          <span class="difficulty-badge" [class]="currentProblem.difficulty.toLowerCase()">
+            {{ currentProblem.difficulty }}
+          </span>
+          <span class="problem-id">ID: {{ currentProblem.id }}</span>
+          <!-- Show skipped indicator -->
+          <span class="difficulty-badge basic" *ngIf="isCurrentProblemSkipped()">
+            SKIPPED
+          </span>
+        </div>
+      </div>
+      <p class="problem-description">{{ currentProblem.description }}</p>
+      
+      <div class="test-cases" *ngIf="currentProblem.testCases.length > 0">
+        <h4>📝 Test Case:</h4>
+        <div class="test-case" *ngFor="let testCase of currentProblem.testCases">
+          <div class="test-case-row">
+            <span class="test-label">Input:</span>
+            <span class="test-value">{{ testCase.input || 'None' }}</span>
+          </div>
+          <div class="test-case-row">
+            <span class="test-label">Expected Output:</span>
+            <span class="test-value">{{ testCase.expectedOutput }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Editor -->
+    <div class="code-section">
+      <div class="code-header">
+        <h3>💻 Code Editor</h3>
+        <div class="editor-actions">
+          <button class="ai-btn" (click)="generateAISolution()" [disabled]="isCodeRunning" title="Generate AI Solution">
+            <span *ngIf="!isCodeRunning">🤖 Show Answer</span>
+            <span *ngIf="isCodeRunning">⏳ Thinking...</span>
+          </button>
+          
+          <button class="run-btn" (click)="runCode()" [disabled]="isCodeRunning">
+            <span *ngIf="!isCodeRunning">▶️ Run Code</span>
+            <span *ngIf="isCodeRunning">⏳ Running...</span>
+          </button>
+        </div>
+      </div>
+      
+      <textarea 
+        class="code-editor" 
+        [(ngModel)]="userCode" 
+        placeholder="Write your code here..."
+        [disabled]="isCodeRunning">
+      </textarea>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section" *ngIf="currentOutput">
+      <div class="output-header">
+        <h4>📤 Output</h4>
+        <span class="output-status" 
+              [class.success]="currentOutput.trim() === currentProblem.expectedOutput.trim()"
+              [class.error]="currentOutput.trim() !== currentProblem.expectedOutput.trim()">
+          {{ currentOutput.trim() === currentProblem.expectedOutput.trim() ? '✅ Correct' : '❌ Incorrect' }}
+        </span>
+      </div>
+      <div class="output-content">
+        <div class="output-row">
+          <span class="output-label">Your Output:</span>
+          <span class="output-value">{{ currentOutput }}</span>
+        </div>
+        <div class="output-row">
+          <span class="output-label">Expected:</span>
+          <span class="output-value expected">{{ currentProblem.expectedOutput }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation for skipped problems -->
+    <div class="navigation-section" *ngIf="skippedProblems.length > 1">
+      <div class="navigation-info">
+        Skipped Problems: {{ getSkippedProblemsCount() }}
+      </div>
+      <div class="navigation-buttons">
+        <button class="nav-btn prev-btn" (click)="goToPreviousSkippedProblem()" title="Go to previous skipped problem">
+          ⬅️ Previous Skipped
+        </button>
+        <button class="nav-btn next-btn" (click)="goToNextSkippedProblem()" title="Go to next skipped problem">
+          Next Skipped ➡️
+        </button>
+      </div>
+    </div>
+
+    <!-- Submit Section -->
+    <div class="submit-section">
+      <div class="action-buttons">
+        <button class="skip-btn" (click)="skipAndSaveCode()" title="Skip this problem but save your code">
+          ⏭️ Skip & Save Code
+        </button>
+        
+        <button class="submit-btn" (click)="submitSolution()" [disabled]="!currentOutput">
+          🎯 Submit Solution
+        </button>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Results -->
+  <div class="results-section" *ngIf="!isTestActive && testResults.length > 0">
+    <div class="results-header">
+      <h2>🏆 Test Results</h2>
+      <div class="score-summary">
+        <div class="score-item">
+          <span class="score-label">Overall Score:</span>
+          <span class="score-value">{{ getOverallScore() }}%</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">Problems Passed:</span>
+          <span class="score-value">{{ getPassedCount() }}/{{ testResults.length }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-list">
+      <div class="result-item" *ngFor="let result of testResults; let i = index">
+        <div class="result-header">
+          <span class="result-number">Problem {{ i + 1 }}</span>
+          <span class="result-title">{{ result.problem.title }}</span>
+          <span class="result-status" [class.passed]="result.passed" [class.failed]="!result.passed">
+            {{ result.passed ? '✅ PASSED' : '❌ FAILED' }}
+          </span>
+        </div>
+        <div class="result-details">
+          <div class="result-row">
+            <span class="result-label">Your Output:</span>
+            <span class="result-value">{{ result.output }}</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Expected:</span>
+            <span class="result-value">{{ result.problem.expectedOutput }}</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Score:</span>
+            <span class="result-value">{{ result.score }}/100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="reset-btn" (click)="resetTest()">
+        🔄 Take Another Test
+      </button>
+    </div>
+  </div>
+</div>

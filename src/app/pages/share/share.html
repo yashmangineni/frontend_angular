@@ -1,0 +1,53 @@
+<div class="share-container">
+  <h1>🔗 Share {{ appName }}</h1>
+  
+  <div class="app-info">
+    <div class="app-icon">
+      <!-- In a real app, this would be an actual app icon -->
+      <div class="icon-placeholder">📱</div>
+    </div>
+    <div class="app-details">
+      <h2>{{ appName }}</h2>
+      <p>Version {{ appVersion }}</p>
+      <p>Prepare for your dream job interviews with our comprehensive platform</p>
+    </div>
+  </div>
+  
+  <div class="share-options">
+    <h3>Share this app</h3>
+    <div class="share-buttons">
+      <button class="share-btn" (click)="shareApp()">
+        <span class="btn-icon">📤</span>
+        Share App
+      </button>
+      
+      <button class="download-btn" (click)="downloadAPK()">
+        <span class="btn-icon">⬇️</span>
+        Download APK
+      </button>
+    </div>
+  </div>
+  
+  <div class="features-preview">
+    <h3>App Features</h3>
+    <ul>
+      <li>📚 Comprehensive interview preparation materials</li>
+      <li>🤖 AI-powered mock interviews</li>
+      <li>💻 Coding practice with real-time feedback</li>
+      <li>📄 Professional resume templates</li>
+      <li>⭐ User ratings and reviews</li>
+      <li>🔒 Secure login and data protection</li>
+    </ul>
+  </div>
+  
+  <div class="instructions">
+    <h3>How to Install</h3>
+    <ol>
+      <li>Download the APK file using the button above</li>
+      <li>Open the downloaded file on your Android device</li>
+      <li>If prompted, enable "Install from unknown sources" in your settings</li>
+      <li>Follow the installation prompts</li>
+      <li>Open the app and start preparing for your interviews!</li>
+    </ol>
+  </div>
+</div>

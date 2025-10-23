@@ -1,0 +1,50 @@
+<!-- Header -->
+<header class="topbar d-flex justify-content-between align-items-center px-3" *ngIf="showHeaderFooter">
+	<div class="logo-container d-flex align-items-center">
+	  <!-- ☰ Hamburger Button -->
+	  <button class="menu-btn" (click)="toggleMenu()">☰</button>
+	  <a class="logo">CrackIT Job</a>
+	</div>
+  
+	<nav class="nav-links">
+	<!-- <button routerLink="/login">Login</button>
+	<button routerLink="/signup">Sign Up</button> -->
+  
+	  <span class="welcome" *ngIf="auth.currentUserEmail() as email">
+		Welcome, {{ getCurrentUserName() }}
+	  </span>
+  
+	  <button class="logout-btn" *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</button>
+	</nav>
+</header>
+
+<div class="overlay" *ngIf="menuOpen && showHeaderFooter" (click)="closeMenu()"></div>
+
+<!-- Sidebar Menu -->
+<div class="sidebar" [class.open]="menuOpen" *ngIf="showHeaderFooter">
+	<ul>
+		<li><a routerLink="/interview">📚 Home </a></li>
+	  <li><a routerLink="/ai-interviews">🤖 AI Interviews</a></li>
+	  <li><a routerLink="/coding-test">💻 Coding Test</a></li>
+	  
+	  <li><a routerLink="/resume-template">📄 Resume Templates</a></li>
+	  <li><a routerLink="/rate">⭐ Rate Us</a></li>
+	  <li><a routerLink="/share">🔗 Share Us</a></li>
+	 
+	  <li><a routerLink="/contact">✉️ Contact Us</a></li>
+	  <li><a routerLink="/privacy">🛡️ Privacy Policy</a></li>
+	</ul>
+</div>
+
+<!-- Main Content -->
+<main [class.with-header-footer]="showHeaderFooter">
+	<router-outlet></router-outlet>
+</main>
+
+<!-- Footer -->
+<footer class="footer" *ngIf="showHeaderFooter">
+	<div class="footer-container">
+	  <p>&copy; Online Interview Preparation to Crack Jobs in IT Sector. All rights reserved.</p>
+	  <p>Created by <span class="author">Yaswanth</span></p>
+	</div>
+</footer>
